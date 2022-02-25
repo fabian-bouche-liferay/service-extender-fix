@@ -1,0 +1,3 @@
+Bundle-Name: service-extender-fix
+Bundle-SymbolicName: com.liferay.samples.fbo.service.extender.fix
+Bundle-Version: 1.0.0
