@@ -80,22 +80,23 @@ public class ServiceExtenderFix {
 			classLoader, "service");
 
 		if ((portletConfiguration == null) && (serviceConfiguration == null)) {
+			_log.error("Neither portlet nor service configuration");
 			return;
 		}
 		
 		String requireSchemaVersion = headers.get(
 				"Liferay-Require-SchemaVersion");
 
-			ServiceConfigurationInitializer serviceConfigurationInitializer =
-				new ServiceConfigurationInitializer(
-					bundle, classLoader, portletConfiguration, serviceConfiguration,
-					_resourceActions, _serviceComponentLocalService);
+		ServiceConfigurationInitializer serviceConfigurationInitializer =
+			new ServiceConfigurationInitializer(
+				bundle, classLoader, portletConfiguration, serviceConfiguration,
+				_resourceActions, _serviceComponentLocalService);
 
-			ServiceConfigurationExtension serviceConfigurationExtension =
-				new ServiceConfigurationExtension(
-					bundle, requireSchemaVersion, serviceConfigurationInitializer);
+		ServiceConfigurationExtension serviceConfigurationExtension =
+			new ServiceConfigurationExtension(
+				bundle, requireSchemaVersion, serviceConfigurationInitializer);
 
-			serviceConfigurationExtension.start();
+		serviceConfigurationExtension.start();
 		
 	}
 	
@@ -169,7 +170,12 @@ public class ServiceExtenderFix {
 					bundle.getSymbolicName(), ")", versionRangeFilter,
 					"(|(!(release.state=*))(release.state=0)))"));
 
+			_log.error("Component was created, adding it to the registry...");
+
 			_component.add(serviceDependency);
+
+			_log.error("Done!");
+
 		}
 
 		private String _getVersionRangerFilter(Version version) {
