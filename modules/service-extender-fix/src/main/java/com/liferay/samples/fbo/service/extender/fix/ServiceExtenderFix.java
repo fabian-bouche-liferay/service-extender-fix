@@ -96,7 +96,11 @@ public class ServiceExtenderFix {
 			new ServiceConfigurationExtension(
 				bundle, requireSchemaVersion, serviceConfigurationInitializer);
 
+		_log.error("Component was created, adding it to the registry...");
+
 		serviceConfigurationExtension.start();
+		
+		_log.error("Done!");
 		
 	}
 	
@@ -170,7 +174,7 @@ public class ServiceExtenderFix {
 					bundle.getSymbolicName(), ")", versionRangeFilter,
 					"(|(!(release.state=*))(release.state=0)))"));
 
-			_log.error("Component was created, adding it to the registry...");
+			_log.error("Adding service dependency...");
 
 			_component.add(serviceDependency);
 
